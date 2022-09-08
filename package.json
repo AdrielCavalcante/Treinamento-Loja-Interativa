@@ -16,9 +16,9 @@
   "devDependencies": {
     "gulp": "^4.0.2",
     "gulp-sass": "^5.1.0",
-    "sass": "^1.54.8",
     "gulp-sourcemaps": "^3.0.0",
     "gulp-util": "^3.0.8",
-    "gulp-watch-sass": "^1.4.1"
+    "gulp-watch-sass": "^1.4.1",
+    "sass": "^1.54.8"
   }
 }

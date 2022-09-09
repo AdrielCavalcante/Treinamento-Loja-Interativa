@@ -11,6 +11,17 @@ function registro_script() {
     wp_register_style("pai_style", THEME_URL . "/style.css?rand=" . rand(10, 10000), [
         // Deixei as dependencias vazias, porque não carregava o css antes, ex: bootstrap
     ]);
+
+    wp_register_script('bootstap', THEME_URL . "/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js");
+    wp_register_script('Vue', THEME_URL . "/js/vue.global.js");
+    wp_register_script('vue-app', THEME_URL . "/js/app.js", 'Vue');
+    wp_register_script('pai_script', THEME_URL . "/js/index.js", [
+        'Vue',
+        'vue-app',
+        'bootstap'
+    ]);
+
+
 }
 
 add_action('init', function () {
@@ -19,6 +30,7 @@ add_action('init', function () {
 
 function init_scripts() {
     wp_enqueue_style('pai_style');
+    wp_enqueue_script('pai_script');
 }
 
 add_action('wp_enqueue_scripts', 'init_scripts', 10);

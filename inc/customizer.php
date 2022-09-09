@@ -15,7 +15,7 @@ function fiocruz_customizer( $wp_customize ){
                 'set_hero_title',
                 array(
                     'type' => 'theme_mod',
-                    'default' => __( 'Please, add some title', 'wp-fiocruz' ),
+                    'default' => __( 'A transversalidade da ciência, tecnologia e inovações para o planeta.', 'wp-fiocruz' ),
                     'sanitize_callback' => 'sanitize_text_field'
                 )
             );
@@ -24,7 +24,7 @@ function fiocruz_customizer( $wp_customize ){
                 'set_hero_title',
                 array(
                     'label' => __( 'Hero Title', 'wp-fiocruz' ),
-                    'description' => __( 'Please, type your here title here', 'wp-fiocruz' ),
+                    'description' => __( 'Escreva seu titulo aqui:', 'wp-fiocruz' ),
                     'section' => 'sec_hero',
                     'type' => 'text'
                 )
@@ -35,7 +35,7 @@ function fiocruz_customizer( $wp_customize ){
                 'set_hero_button_text',
                 array(
                     'type' => 'theme_mod',
-                    'default' => __( 'Learn More', 'wp-fiocruz' ),
+                    'default' => __( 'CONFIRA A PROGRAMAÇÃO', 'wp-fiocruz' ),
                     'sanitize_callback' => 'sanitize_text_field'
                 )
             );
@@ -44,7 +44,7 @@ function fiocruz_customizer( $wp_customize ){
                 'set_hero_button_text',
                 array(
                     'label' => __( 'Hero button text', 'wp-fiocruz' ),
-                    'description' => __( 'Please, type your hero button text here', 'wp-fiocruz' ),
+                    'description' => __( 'Insira o texto do botão aqui:', 'wp-fiocruz' ),
                     'section' => 'sec_hero',
                     'type' => 'text'
                 )

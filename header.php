@@ -18,7 +18,7 @@
                         the_custom_logo();
                     } else {
                     ?>
-                        <span>18° SEMANA NACIONAL DE CIÊNCIA E TECNOLOGIA FIOCRUZ 2021</span>
+                        <span style="font-family: 'Squada One', saens-serif">18° SEMANA NACIONAL DE CIÊNCIA <br> E TECNOLOGIA FIOCRUZ 2021</span>
                     <?php
                     }
                     ?>

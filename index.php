@@ -10,7 +10,7 @@ $hero_background = wp_get_attachment_url( get_theme_mod( 'set_hero_background' )
 <main class="container-fluid">
 
     <div class="hero" style="background-image: url('<?php echo esc_url( $hero_background ); ?>');">
-        <h1> <?php echo esc_html( $hero_title ); ?></h1>
+        <h1 style="text-align: left;"> <?php echo esc_html( $hero_title ); ?></h1>
         <button class="btn"> <?php echo esc_html( $hero_button_text ); ?> </button>
     </div>
     <div class="contador">
@@ -34,7 +34,7 @@ $hero_background = wp_get_attachment_url( get_theme_mod( 'set_hero_background' )
     </div>
     <section class="container" id="apresentacao">
         <article class="col-md-6">
-            <img src="http://localhost/fiocruz/wp-content/uploads/2022/09/img-apresentacao-nova.jpg" alt="" width="1200">
+            <img src="http://fiocruz.local/wp-content/uploads/2022/09/img-apresentacao-nova.jpeg" alt="img n carregou" width="1200">
         </article>
         <article class="col-md-6">
             <h2>FIOCRUZ NA SEMANA NACIONAL DE CIÊNCIA E TECNOLOGIA</h2>
@@ -55,6 +55,11 @@ $hero_background = wp_get_attachment_url( get_theme_mod( 'set_hero_background' )
     <section id="convidados" class="container">
         <h1>CONVIDADOS</h1>
         <!-- LOOP DE POST DOS CONVIDADOS COM AJAX -->
+        <div id="app-hello">
+            <h3>{{mensagem}}</h3>
+            <h3 v-html="mensagem"></h3> <!-- Esse modelo considera as tags HTML -->
+            <button @click="salvar()">Salvar</button>
+        </div>
     </section>
     <section id="programacao" class="container">
         <h1>PROGRAMAÇÃO AO VIVO</h1>

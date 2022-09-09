@@ -65,9 +65,11 @@ h1 {
             font-size: 3.125rem;
             color: #FFF;
             font-family: "Squada One", sans-serif;
+            text-transform: none;
         }
 
         button {
+            font-family: 'Squada One', sans-serif;
             background-color: $ciano;
             border-color: $ciano;
             font-weight: bold;

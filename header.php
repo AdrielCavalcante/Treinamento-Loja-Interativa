@@ -22,6 +22,9 @@
                     <?php
                     }
                     ?>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
                     <div class="d-flex flex-column">
                         <div class="row d-leg-flex">
                             <div class="d-flex justify-content-end">
@@ -49,11 +52,8 @@
                             </div>
                         </div>
                         <div class="row">
-                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                <?php wp_nav_menu(array('theme_location' => 'main-menu', 'depth' => 2, 'menu_class' => 'navbar-nav')); ?>
+                                <?php wp_nav_menu(array('theme_location' => 'main-menu', 'depth' => 2, 'menu_class' => 'navbar-nav', 'container' => false)); ?>
                             </div>
                         </div>
                     </div>

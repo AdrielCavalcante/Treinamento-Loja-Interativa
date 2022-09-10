@@ -13,22 +13,21 @@ $hero_background = wp_get_attachment_url( get_theme_mod( 'set_hero_background' )
         <h1 style="text-align: left;"> <?php echo esc_html( $hero_title ); ?></h1>
         <button class="btn"> <?php echo esc_html( $hero_button_text ); ?> </button>
     </div>
-    <div class="contador">
-
+    <div class="contador" id="contador">
         <div class="d-flex flex-column align-items-center">
-            <strong>21</strong>
+            <strong>{{ days }}</strong>
             <span>Dias</span>
         </div>
         <div class="d-flex flex-column align-items-center">
-            <strong>14</strong>
+            <strong>{{ hours }}</strong>
             <span>Horas</span>
         </div>
         <div class="d-flex flex-column align-items-center">
-            <strong>16</strong>
+            <strong>{{ minutes }}</strong>
             <span>Minutos</span>
         </div>
         <div class="d-flex flex-column align-items-center">
-            <strong>25</strong>
+            <strong>{{ seconds }}</strong>
             <span>Segundos</span>
         </div>
     </div>
@@ -56,9 +55,15 @@ $hero_background = wp_get_attachment_url( get_theme_mod( 'set_hero_background' )
         <h1>CONVIDADOS</h1>
         <!-- LOOP DE POST DOS CONVIDADOS COM AJAX -->
         <div id="app-hello">
-            <h3>{{mensagem}}</h3>
-            <h3 v-html="mensagem"></h3> <!-- Esse modelo considera as tags HTML -->
-            <button @click="salvar()">Salvar</button>
+            <h3>Pokedex:</h3> <!-- Lógica semelhante quando for aplicar os Convidados -->
+            <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+                <div class="col-md-2" style="padding: 1rem;" v-for="pokemon in post"> 
+                   <h4>
+                    {{ pokemon.name }}
+                   </h4>
+                </div>
+            </div>
+            <button @click="carregarMais()">Salvar</button>
         </div>
     </section>
     <section id="programacao" class="container">

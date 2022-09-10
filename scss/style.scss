@@ -55,10 +55,12 @@ h1 {
     align-items: center;
 }
 .container-fluid {
-    margin-top: 5.25rem;
+    margin-top: 4.25rem;
     padding: 0;
 
     .hero {
+        background-repeat: no-repeat;
+        background-size: cover;
         padding: 6rem 19rem 6rem 3rem;
 
         h1 {

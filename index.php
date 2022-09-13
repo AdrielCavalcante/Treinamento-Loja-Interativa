@@ -54,17 +54,39 @@ $hero_background = wp_get_attachment_url( get_theme_mod( 'set_hero_background' )
     <section id="convidados" class="container">
         <h1>CONVIDADOS</h1>
         <!-- LOOP DE POST DOS CONVIDADOS COM AJAX -->
-        <div id="app-hello">
-            <h3>Pokedex:</h3> <!-- Lógica semelhante quando for aplicar os Convidados -->
-            <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
-                <div class="col-md-2" style="padding: 1rem;" v-for="pokemon in post"> 
-                   <h4>
-                    {{ pokemon.name }}
-                   </h4>
-                </div>
+        <div class="row">
+            <div class="col-2" style="margin: 0 1rem;" v-for="(post,index) in posts">
+
+                <a data-bs-toggle="modal" :data-bs-target="'#modal-'+index" href="#" v-html="post.title"></a>
+
+<!-- Modal -->
+<div class="modal fade" :id="'modal-'+index" tabindex="-1" :aria-labelledby="'modal-'+index"
+        aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" v-html="post.title"></h5>
+                <i data-bs-dismiss="modal" aria-label="Close" class="fas fa-times close"></i>
             </div>
-            <button @click="carregarMais()">Salvar</button>
+            <div class="modal-body" v-html="post.conteudo"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
         </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+
+        <div v-if="show" class="row">
+            <div class="col-12" style="text-align: center;">
+                <button @click="loadMore()" class="btn btn-primary">CARREGAR MAIS</button>
+            </div>
+        </div>
+
+    </div>
     </section>
     <section id="programacao" class="container">
         <h1>PROGRAMAÇÃO AO VIVO</h1>

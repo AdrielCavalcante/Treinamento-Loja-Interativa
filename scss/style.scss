@@ -212,3 +212,11 @@ h1 {
         }
     }
 }
+
+.modal {
+    .close {
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

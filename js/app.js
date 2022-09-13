@@ -37,27 +37,43 @@ document.addEventListener("DOMContentLoaded", function () {
     createApp({
         data() {
             return {
-                mensagem: 'Bem vindo a pokedex',
-                post: null,
+                posts: [],
+                currentpage: 1,
+                maxpages: 1,
+                show: true,
             }
         },
         methods: {
-            // Onde posso criar diversas funções Vue
-            salvar() {
-                axios.get("https://pokeapi.co/api/v2/pokemon/?limit="+contador).then(result =>{
-                    this.post = result.data.results;
+            loadPosts() {
+                axios.get(siteurl + '/wp-json/api/v1/convidados?paged=' + this.currentpage).then((response) => {
+                    console.log(response);
+                    if (response.data && response.data.posts && response.status === 200) {
+                        const posts = response.data.posts;
+
+                        posts.forEach((item, index) => {
+                            this.posts.push(item);
+                        });
+
+                        this.maxpages = response.data.maxpages;
+                        console.log(this.posts);
+                        console.log(this.maxpages);
+                    }
                 });
             },
-
-            carregarMais() {
-                contador = contador + 6;
-                this.salvar();
+            loadMore() {
+                if (this.currentpage < this.maxpages) {
+                    this.currentpage++;
+                    this.loadPosts();
+                }
+                if (this.currentpage === this.maxpages) {
+                    this.show = false;
+                }
+                console.log(this.currentpage);
             }
         },
         mounted() {
-            this.salvar();
-        },
-
-    }).mount('#app-hello');
+            this.loadPosts();
+        }
+    }).mount('#convidados');
 
 });

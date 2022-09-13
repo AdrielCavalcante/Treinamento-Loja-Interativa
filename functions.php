@@ -7,9 +7,12 @@ require_once get_template_directory() . '/inc/customizer.php';
 
 //script ou style
 function registro_script() {
+
+    wp_register_style("fontawesome", "https://cdn.jsdelivr.net/gh/hung1001/font-awesome-pro@4cac1a6/css/all.css");
+
     //style PAI
     wp_register_style("pai_style", THEME_URL . "/style.css?rand=" . rand(10, 10000), [
-        // Deixei as dependencias vazias, porque não carregava o css antes, ex: bootstrap
+        'fontawesome'
     ]);
 
     wp_register_script('bootstap', THEME_URL . "/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js");
@@ -78,3 +81,116 @@ function add_class_to_li($atts, $item, $args)
     return $atts;
 }
 
+if (function_exists('acf_add_options_page')) {
+
+    acf_add_options_page(array(
+        'page_title' => 'Titulo da pag',
+        'menu_title' => 'Titulo do Menu',
+        'menu_slug' => 'Slug do menu',
+        'capability' => 'edit_posts',
+        'redirect' => false
+    ));
+
+}
+
+add_action('wp_head', 'site_wp_head');
+
+function site_wp_head()
+{
+    echo sprintf("<script>var siteurl = '%s'; var current_post_id = '%s'</script>", get_option('siteurl'), get_the_ID());
+
+}
+
+add_action('rest_api_init', 'restApiConvidados');
+
+add_action('rest_api_init', 'restApiEventos');
+
+function restApiConvidados()
+{
+    register_rest_route('api/v1', 'convidados', [
+        'methods' => ['GET'],
+        'callback' => 'convidados_posts',
+        'permission_callback' => '__return_true',
+    ]);
+}
+
+function restApiEventos()
+{
+    register_rest_route('api/v1', 'eventos', [
+        'methods' => ['GET'],
+        'callback' => 'eventos_posts',
+        'permission_callback' => '__return_true',
+    ]);
+}
+
+/**
+ * @param $request WP_REST_Request
+ *
+ * @return WP_REST_Response
+ */
+function convidados_posts($request)
+{
+    $params = $request->get_params();
+
+    $paged = !empty($params['paged']) ? $params['paged'] : 1;
+
+    $args = [
+        'paged' => $paged,
+        'post_type' => 'convidados', 'posts_per_page' => 10
+    ];
+
+    $query = new WP_Query($args);
+
+    $post = [];
+    $count = 0;
+
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            $post[$count]['id'] = get_the_ID();
+            $post[$count]['title'] = get_the_title();
+            $post[$count]['conteudo'] = get_the_content();
+            $count++;
+        }
+
+        wp_reset_postdata();
+        return new WP_REST_Response(['success' => true, 'posts' => $post, 'request' => $params, 'maxpages' => $query->max_num_pages]
+            , 200);
+    } else {
+        return new WP_REST_Response(['success' => false, 'posts' => $post, 'request' => $params], 200);
+    }
+}
+
+/**
+ * @param $request WP_REST_Request
+ *
+ * @return WP_REST_Response
+ */
+function eventos_posts($request)
+{
+    $params = $request->get_params();
+
+    $args = [
+        'post_type' => 'evento'
+    ];
+
+    $query = new WP_Query($args);
+
+    $post = [];
+    $count = 0;
+
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            $post[$count]['id'] = get_the_ID();
+            $post[$count]['title'] = get_the_title();
+            $post[$count]['conteudo'] = get_the_content();
+            $count++;
+        }
+
+        wp_reset_postdata();
+        return new WP_REST_Response(['success' => true, 'posts' => $post, 'request' => $params], 200);
+    } else {
+        return new WP_REST_Response(['success' => false, 'posts' => $post, 'request' => $params], 200);
+    }
+}

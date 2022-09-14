@@ -27,27 +27,25 @@
                             </button>
                     <div class="d-flex flex-column">
                         <div class="row d-leg-flex">
-                            <div class="d-flex justify-content-end">
-                                <div class="d-lg-block">
-                                    <div class="pular-conteudo box-top d-flex align-items-center mt-3 mt-lg-0 py-2 py-lg-0 mr-3 h-100">
-                                        <a href="#">
-                                            icon
-                                            <strong>PULAR PARA CONTEÚDO</strong>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="box-top na-web d-flex mr-3 align-items-center">
+                            <div class="d-flex justify-content-end" style="gap: 3.5rem;">
+                                <div class="box-top d-flex align-items-center">
                                     <strong>NA WEB</strong>
-                                    <a href="#">link das redes</a>
+                                    <a href="#"><i style="margin-top: .45rem;" class="fab fa-twitter"></i></a>
+                                    <a href="#"><i style="margin-top: .45rem;" class="fab fa-facebook-f"></i></a>
+                                    <a href="#"><i style="margin-top: .45rem;" class="fab fa-instagram"></i></a>
+                                    <a href="#"><i style="margin-top: .45rem;" class="fab fa-youtube"></i></a>
                                 </div>
-                                <div class="box-top texto-size d-flex align-items-baseline mr-3 mt-3 mt-lg-0">
+                                <div class="box-top d-flex align-items-baseline">
                                     <strong>TEXTO</strong>
                                     <div>
-                                        3 icon
+                                        <span style="color: #05C6B7; font-size: 0.75rem">A</span>
+                                        <span style="color: #05C6B7; font-size: 1rem">A</span>
+                                        <span style="color: #05C6B7; font-size: 1.25rem">A</span>
                                     </div>
                                 </div>
-                                <div class="box-top alto-contraste d-flex align-items-center mt-3 mt-lg-0 py-2 py-lg-0">
-                                    <a href="#">Contraste</a>
+                                <div class="box-top alto-contraste d-flex align-items-center">
+                                    <i class="fas fa-adjust" style="color: #05C6B7"></i>
+                                    <strong>ALTO CONTRASTE</strong>
                                 </div>
                             </div>
                         </div>

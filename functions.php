@@ -3,8 +3,6 @@
 define("THEME_URL", get_stylesheet_directory_uri());
 define("THEME_DIR", get_stylesheet_directory());
 
-require_once get_template_directory() . '/inc/customizer.php';
-
 //script ou style
 function registro_script() {
 
@@ -81,18 +79,6 @@ function add_class_to_li($atts, $item, $args)
     return $atts;
 }
 
-if (function_exists('acf_add_options_page')) {
-
-    acf_add_options_page(array(
-        'page_title' => 'Titulo da pag',
-        'menu_title' => 'Titulo do Menu',
-        'menu_slug' => 'Slug do menu',
-        'capability' => 'edit_posts',
-        'redirect' => false
-    ));
-
-}
-
 add_action('wp_head', 'site_wp_head');
 
 function site_wp_head()
@@ -136,7 +122,7 @@ function convidados_posts($request)
 
     $args = [
         'paged' => $paged,
-        'post_type' => 'convidados', 'posts_per_page' => 10
+        'post_type' => 'convidados', 'posts_per_page' => 5
     ];
 
     $query = new WP_Query($args);

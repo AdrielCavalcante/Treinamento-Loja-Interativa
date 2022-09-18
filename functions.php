@@ -136,6 +136,8 @@ function convidados_posts($request)
             $post[$count]['id'] = get_the_ID();
             $post[$count]['title'] = get_the_title();
             $post[$count]['conteudo'] = get_the_content();
+            $post[$count]['nome'] = get_field('nome');
+            $post[$count]['fotoConvidado'] = get_field('fotoConvidado');
             $count++;
         }
 
@@ -157,7 +159,7 @@ function eventos_posts($request)
     $params = $request->get_params();
 
     $args = [
-        'post_type' => 'evento'
+        'post_type' => 'eventos'
     ];
 
     $query = new WP_Query($args);
@@ -171,6 +173,11 @@ function eventos_posts($request)
             $post[$count]['id'] = get_the_ID();
             $post[$count]['title'] = get_the_title();
             $post[$count]['conteudo'] = get_the_content();
+            $post[$count]['titulo'] = get_field('titulo');
+            $post[$count]['descricao'] = get_field('descricao');
+            $post[$count]['embed'] = get_field('embed');
+            $post[$count]['dataHora'] = get_field('dataHora');
+            $post[$count]['localizacao'] = get_field('localizacao');
             $count++;
         }
 

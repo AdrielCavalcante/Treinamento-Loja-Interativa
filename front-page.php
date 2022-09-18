@@ -9,8 +9,8 @@ $hero_background = get_field('bannerBackground');
 <main class="container-fluid">
 
     <div class="hero" style="background-image: url('<?php echo esc_url( $hero_background ); ?>');">
-        <h1 style="text-align: left;"> <?php echo esc_html( $hero_title ); ?></h1>
-        <button class="btn"> <?php the_field('textButton'); ?> </button>
+        <h1 style="text-align: left; text-transform: uppercase;"> <?php echo esc_html( $hero_title ); ?></h1>
+        <button class="btn" style="text-transform: uppercase;"> <?php the_field('textButton'); ?> </button>
     </div>
     <div class="contador" id="contador">
         <div class="d-flex flex-column align-items-center">
@@ -53,18 +53,26 @@ $hero_background = get_field('bannerBackground');
     <section id="convidados" class="container">
         <h1>CONVIDADOS</h1>
         <!-- LOOP DE POST DOS CONVIDADOS COM AJAX -->
-        <div class="row">
-            <div class="col-2" style="margin: 0 1rem;" v-for="(post,index) in posts">
+        <div class="row justify-content-evenly">
+            <div class="col-md-2 mx-2 mx-md-3 my-3" style="margin: 0 1rem;" v-for="(post,index) in posts1">
 
-                <a data-bs-toggle="modal" :data-bs-target="'#modal-'+index" href="#" v-html="post.title"></a>
+                <a data-bs-toggle="modal" @click="EventData(index)" :data-bs-target="'#modal-'+index" href="#">
+                    <div class="card">
+                    <img :src="post.fotoConvidado" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title" v-html="post.nome"></h5>
+                            <small><i class="far fa-plus-circle"></i> Ver Programação</small>
+                        </div>
+                    </div>
+                </a>
 
 <!-- Modal -->
 <div class="modal fade" :id="'modal-'+index" tabindex="-1" :aria-labelledby="'modal-'+index"
         aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel" v-html="post.title"></h5>
+            <div class="modal-header" style="border-bottom: 0;">
+                <h5 class="modal-title" id="exampleModalLabel">{{ post.titulo }}</h5>
                 <i data-bs-dismiss="modal" aria-label="Close" class="fas fa-times close"></i>
             </div>
             <div class="modal-body" v-html="post.conteudo"></div>

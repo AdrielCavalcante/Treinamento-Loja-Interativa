@@ -37,7 +37,8 @@ document.addEventListener("DOMContentLoaded", function () {
     createApp({
         data() {
             return {
-                posts: [],
+                posts1: [],
+                posts2: {},
                 currentpage: 1,
                 maxpages: 1,
                 show: true,
@@ -46,17 +47,14 @@ document.addEventListener("DOMContentLoaded", function () {
         methods: {
             loadPosts() {
                 axios.get(siteurl + '/wp-json/api/v1/convidados?paged=' + this.currentpage).then((response) => {
-                    console.log(response);
                     if (response.data && response.data.posts && response.status === 200) {
                         const posts = response.data.posts;
 
                         posts.forEach((item, index) => {
-                            this.posts.push(item);
+                            this.posts1.push(item);
                         });
 
                         this.maxpages = response.data.maxpages;
-                        console.log(this.posts);
-                        console.log(this.maxpages);
                     }
                 });
             },
@@ -68,7 +66,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (this.currentpage === this.maxpages) {
                     this.show = false;
                 }
-                console.log(this.currentpage);
+            },
+            EventData(id){
+                axios.get(siteurl + '/wp-json/api/v1/eventos').then((response) => {
+                    if (response.data && response.data.posts && response.status === 200) {
+                        this.posts2 = response.data.posts[id];
+                    }
+                });
             }
         },
         mounted() {

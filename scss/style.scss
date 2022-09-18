@@ -244,12 +244,47 @@ h1 {
             }
         }
     }
+    #convidados {
+        .card {
+            padding: .5rem .5rem 0 .5rem;
+
+            .card-body {
+                padding: var(--bs-card-spacer-y) 0;
+                text-align: center;
+
+                h5 {
+                    font-size: 1rem;
+                    color: $roxo;
+                    text-decoration: underline;
+                }
+    
+                small {
+                    font-size: .75rem;
+                    text-decoration: underline;
+                    color: black;
+                    font-family: 'Titillium Web', sans-serif;
+                }
+            }
+        }
+    }
 }
 
 .modal {
-    .close {
-        &:hover {
-            cursor: pointer;
+    border-radius: 0;
+
+    .modal-header {
+        .close {
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        h5 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            line-height: 1;
         }
     }
+
+
 }

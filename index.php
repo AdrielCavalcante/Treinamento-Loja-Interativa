@@ -10,7 +10,7 @@ $hero_background = get_field('bannerBackground');
 
     <div class="hero" style="background-image: url('<?php echo esc_url( $hero_background ); ?>');">
         <h1 style="text-align: left;"> <?php echo esc_html( $hero_title ); ?></h1>
-        <button class="btn"> <?php the_field('textButton'); ?> </button>
+        <button class="btn"> <?php echo esc_html( $hero_button_text ); ?> </button>
     </div>
     <div class="contador" id="contador">
         <div class="d-flex flex-column align-items-center">
@@ -36,13 +36,13 @@ $hero_background = get_field('bannerBackground');
         </article>
         <article class="col-md-6">
             <h2>AQUI ENTRA A FRASE DE APRESENTAÇÃO</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, in? Accusantium vel magnam quo omnis veniam dolorem suscipit, maxime quasi saepe rerum illum totam nesciunt possimus commodi sed pariatur non? Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque totam neque officiis perspiciatis obcaecati voluptas veritatis inventore eos soluta nemo, rerum quibusdam repellat laudantium quis tempora explicabo laboriosam vel praesentium?.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis soluta quae facilis, quo reprehenderit obcaecati molestiae modi minima delectus est assumenda vel suscipit rem, reiciendis, mollitia praesentium a amet tenetur?</p>
             <button class="btn">SAIBA MAIS SOBRE A SEMANA</button>
         </article>
     </section>
     <section id="inscricao">
         <h1>INSCRIÇÃO</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto facilis inventore qui cum unde repudiandae rem assumenda neque tenetur enim asperiores tempora, laboriosam iste? Modi qui fugit harum aliquam impedit?.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint tempora eius unde necessitatibus nam eum, cupiditate ratione, amet odio, accusantium ducimus excepturi magnam! Ea eveniet quis odit voluptas? Neque, fuga.</p>
         <button class="btn">INSCREVA-SE</button>
         <article>
             <a href="#">Link Complementar 01</a>
@@ -76,7 +76,7 @@ $hero_background = get_field('bannerBackground');
     </div>
 </div>
 
-            </div>
+</div>
         </div>
 
         <div v-if="show" class="row">

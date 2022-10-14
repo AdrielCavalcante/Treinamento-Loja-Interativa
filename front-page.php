@@ -54,11 +54,11 @@ $hero_background = get_field('bannerBackground');
         <h1>CONVIDADOS</h1>
         <!-- LOOP DE POST DOS CONVIDADOS COM AJAX -->
         <div class="row justify-content-evenly">
-            <div class="col-md-2 mx-2 mx-md-3 my-3" style="margin: 0 1rem;" v-for="(post,index) in posts1">
+            <div class="col-xl-2 col-lg-3 col-md-4" style="margin: 0 1rem;" v-for="(post,index) in posts1">
 
                 <a data-bs-toggle="modal" @click="EventData(index)" :data-bs-target="'#modal-'+index" href="#">
                     <div class="card">
-                    <img :src="post.fotoConvidado" class="card-img-top" alt="...">
+                        <img :src="post.fotoConvidado" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title" v-html="post.nome"></h5>
                             <small><i class="far fa-plus-circle"></i> Ver Programação</small>
@@ -89,19 +89,143 @@ $hero_background = get_field('bannerBackground');
 
         <div v-if="show" class="row">
             <div class="col-12" style="text-align: center;">
-                <button @click="loadMore()" class="btn btn-primary">CARREGAR MAIS</button>
+                <button @click="loadMore()" class="btn btn-primary carregar">CARREGAR MAIS</button>
             </div>
         </div>
 
-    </div>
     </section>
     <section id="programacao" class="container">
         <h1>PROGRAMAÇÃO AO VIVO</h1>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">SEGUNDA, 17</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " aria-current="page" href="#">TERÇA, 18</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " aria-current="page" href="#">QUARTA, 19</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " aria-current="page" href="#">QUINTA, 20</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " aria-current="page" href="#">SEXTA, 21</a>
+            </li>
+        </ul>
+        <div class="d-flex" style="margin: 1rem 0; gap: 2rem;">
+            <div style="width: 50%;">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar" aria-describedby="button-addon2">
+                    <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            <div style="width: 50%;">
+                <select class="form-select" aria-label="As unidades">
+                    <option selected>Todas as unidades</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+        </div>
+        
         <i class="fas fa-search"></i>
         <i class="far fa-plus-circle"></i>
         <i class="far fa-clock"></i>
         <i class="fas fa-map-marker-alt"></i>
         <!-- LOOP DE POST DOS PROGRAMAS COM PAGINACAO E BUSCA EM AJAX -->
+    </section>
+    <section id="programacaoGravada">
+        <h1 style="text-align: center;">PROGRAMAÇÃO GRAVADA</h1>
+        <section class="justify-content-center">
+            <article class="card col-3">
+                <img src="http://fiocruz.local/wp-content/uploads/2022/09/Grupo-287.png" width="64" alt="">
+                <a class="card-title" data-bs-toggle="modal" data-bs-target="#modalGravado" href="#">Podcasts</a>
+            </article>
+            <article class="card col-3">
+                <img src="http://fiocruz.local/wp-content/uploads/2022/09/Grupo-287.png" width="64" alt="">
+                <a class="card-title" data-bs-toggle="modal" data-bs-target="#modalGravado" href="#">Podcasts</a>
+            </article>
+            <article class="card col-3">
+                <img src="http://fiocruz.local/wp-content/uploads/2022/09/Grupo-287.png" width="64" alt="">
+                <a class="card-title" data-bs-toggle="modal" data-bs-target="#modalGravado" href="#">Podcasts</a>
+            </article>
+            <article class="card col-3">
+                <img src="http://fiocruz.local/wp-content/uploads/2022/09/Grupo-287.png" width="64" alt="">
+                <a class="card-title" data-bs-toggle="modal" data-bs-target="#modalGravado" href="#">Podcasts</a>
+            </article>
+            <article class="card col-3">
+                <img src="http://fiocruz.local/wp-content/uploads/2022/09/Grupo-287.png" width="64" alt="">
+                <a class="card-title" data-bs-toggle="modal" data-bs-target="#modalGravado" href="#">Podcasts</a>
+            </article>
+            <article class="card col-3">
+                <img src="http://fiocruz.local/wp-content/uploads/2022/09/Grupo-287.png" width="64" alt="">
+                <a class="card-title" data-bs-toggle="modal" data-bs-target="#modalGravado" href="#">Podcasts</a>
+            </article>
+        </section>
+
+<!-- Modal -->
+<div class="modal fade" id="modalGravado" tabindex="-1" :aria-labelledby="modalGravado"
+        aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+        <div class="modal-content">
+            <div class="modal-header" style="border-bottom: 0;">
+                <div>
+                    <h5 class="modal-title" id="exampleModalLabel">Podcasts</h5>
+                    <h6 class="modal-title">Lançamento: 29/09</h6>
+                </div>
+                <i data-bs-dismiss="modal" aria-label="Close" class="fas fa-times close"></i>
+            </div>
+            <div class="modal-body">
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Accordion Item #1
+                    </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                    </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Accordion Item #2
+                    </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                    </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Accordion Item #3
+                    </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+    </section>
+    <section id="novidades">
+        <h1>NOVIDADES</h1>
     </section>
 </main>
 

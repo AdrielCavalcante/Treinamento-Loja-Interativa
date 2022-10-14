@@ -81,7 +81,7 @@ $hero_background = get_field('bannerBackground');
 
         <div v-if="show" class="row">
             <div class="col-12" style="text-align: center;">
-                <button @click="loadMore()" class="btn btn-primary">CARREGAR MAIS</button>
+                <button @click="loadMore()" class="btn btn-primary carregar">CARREGAR MAIS</button>
             </div>
         </div>
 

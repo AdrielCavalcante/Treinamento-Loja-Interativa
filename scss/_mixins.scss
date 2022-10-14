@@ -1,0 +1,21 @@
+@use 'variables';
+
+@mixin tituloMain {
+    color: variables.$roxo;
+    font-size: 60px;
+    font-family: "Squada One", sans-serif;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+@mixin tablet {
+    @media(max-width: 769px){
+        @content;
+    }
+}
+
+@mixin mobile {
+    @media(max-width: 426px){
+        @content;
+    }
+}

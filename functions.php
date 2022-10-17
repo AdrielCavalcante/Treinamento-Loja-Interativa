@@ -138,6 +138,7 @@ function convidados_posts($request)
             $post[$count]['conteudo'] = get_the_content();
             $post[$count]['nome'] = get_field('nome');
             $post[$count]['fotoConvidado'] = get_field('fotoConvidado');
+            $post[$count]['evento'] = get_field('evento');
             $count++;
         }
 

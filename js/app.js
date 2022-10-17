@@ -2,8 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const {createApp} = Vue;
 
-    let contador = 6;
-
     createApp({
         created() {
             window.setInterval(() => {
@@ -37,8 +35,8 @@ document.addEventListener("DOMContentLoaded", function () {
     createApp({
         data() {
             return {
-                posts1: [],
-                posts2: {},
+                posts: [],
+                evento: {},
                 currentpage: 1,
                 maxpages: 1,
                 show: true,
@@ -51,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         const posts = response.data.posts;
 
                         posts.forEach((item, index) => {
-                            this.posts1.push(item);
+                            this.posts.push(item);
                         });
 
                         this.maxpages = response.data.maxpages;
@@ -70,7 +68,13 @@ document.addEventListener("DOMContentLoaded", function () {
             EventData(id){
                 axios.get(siteurl + '/wp-json/api/v1/eventos').then((response) => {
                     if (response.data && response.data.posts && response.status === 200) {
-                        this.posts2 = response.data.posts[id];
+                        const events = response.data.posts;
+
+                        events.forEach((item) => {
+                            if(item.id == id) {
+                                this.evento = item;
+                            }
+                        });
                     }
                 });
             }
@@ -81,3 +85,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }).mount('#convidados');
 
 });
+
+
+    

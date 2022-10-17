@@ -54,9 +54,9 @@ $hero_background = get_field('bannerBackground');
         <h1>CONVIDADOS</h1>
         <!-- LOOP DE POST DOS CONVIDADOS COM AJAX -->
         <div class="row justify-content-evenly">
-            <div class="col-xl-2 col-lg-3 col-md-4" style="margin: 0 1rem;" v-for="(post,index) in posts1">
+            <div class="col-xl-2 col-lg-3 col-md-4" style="margin: 0 1rem;" v-for="(post, index) in posts">
 
-                <a data-bs-toggle="modal" @click="EventData(index)" :data-bs-target="'#modal-'+index" href="#">
+                <a data-bs-toggle="modal" @click="EventData(post.evento)" :data-bs-target="'#modal-'+index" href="#">
                     <div class="card">
                         <img :src="post.fotoConvidado" class="card-img-top" alt="...">
                         <div class="card-body">
@@ -70,15 +70,21 @@ $hero_background = get_field('bannerBackground');
 <div class="modal fade" :id="'modal-'+index" tabindex="-1" :aria-labelledby="'modal-'+index"
         aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
-        <div class="modal-content">
-            <div class="modal-header" style="border-bottom: 0;">
-                <h5 class="modal-title" id="exampleModalLabel">{{ post.titulo }}</h5>
+        <div class="modal-content eventoModal" style="padding: 1.75rem;">
+            <div class="modal-header" style="padding: 0; border-bottom: 0;">
+                <h5 class="modal-title" id="exampleModalLabel">{{ evento.titulo }}</h5>
                 <i data-bs-dismiss="modal" aria-label="Close" class="fas fa-times close"></i>
             </div>
-            <div class="modal-body" v-html="post.conteudo"></div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+            <div class="modal-body" style="padding: 0;">
+                <div class="ratio ratio-16x9">
+                    <iframe :src="evento.embed" title="Veja o vídeo do evento" allowscriptaccess="always" allow="autoplay" allowfullscreen></iframe>
+                </div>
+                <p style="color: #555; margin-bottom: 2rem;">{{ evento.descricao }}</p>
+                <strong style="font-family: 'Squada one'">Youtube e Canal de TV Canal Saúde</strong>
+            </div>
+            <div class="modal-footer justify-content-start" style="padding: 0; gap: 1.5rem; color: #4f4f4f; border-color: #10277c; margin-bottom: 0;">
+                <span><i class="far fa-clock"></i> Das 10h às 11h</span>
+                <span><i class="fas fa-map-marker-alt"></i> Localização etc etc etc etc...</span>
             </div>
         </div>
     </div>
@@ -129,11 +135,29 @@ $hero_background = get_field('bannerBackground');
                 </select>
             </div>
         </div>
+        <div class="row" id="programacaoEvento">
+            <div class="col-6">
+                <div class="card" style="padding: 1rem;">
+                    <div class="row" style="gap: 1.25rem;">
+                        <div class="col-1">
+                            <button style="height: 8rem;"><i class="far fa-plus-circle"></i> Saiba Mais</button>
+                        </div>
+                        <div class="col-10">
+                            <h5>Titulo do Evento Titulo do Evento Titulo do Evento Titulo do Evento Titulo do Evento</h5>
+                            <div class="row" style="font-size: 1.15rem; color: #4f4f4f;">
+                                <div class="col-5">
+                                    <span><i class="far fa-clock"></i> Das 10h às 11h</span>
+                                </div>
+                                <div class="col-7">
+                                    <span><i class="fas fa-map-marker-alt"></i> Localização etc etc etc etc...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         
-        <i class="fas fa-search"></i>
-        <i class="far fa-plus-circle"></i>
-        <i class="far fa-clock"></i>
-        <i class="fas fa-map-marker-alt"></i>
         <!-- LOOP DE POST DOS PROGRAMAS COM PAGINACAO E BUSCA EM AJAX -->
     </section>
     <section id="programacaoGravada">

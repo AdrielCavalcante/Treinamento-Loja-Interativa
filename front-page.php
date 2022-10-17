@@ -66,10 +66,10 @@ $hero_background = get_field('bannerBackground');
                     </div>
                 </a>
 
-<!-- Modal -->
+<!-- Modal convidados-->
 <div class="modal fade" :id="'modal-'+index" tabindex="-1" :aria-labelledby="'modal-'+index"
         aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content eventoModal" style="padding: 1.75rem;">
             <div class="modal-header" style="padding: 0; border-bottom: 0;">
                 <h5 class="modal-title" id="exampleModalLabel">{{ evento.titulo }}</h5>
@@ -83,8 +83,8 @@ $hero_background = get_field('bannerBackground');
                 <strong style="font-family: 'Squada one'">Youtube e Canal de TV Canal Saúde</strong>
             </div>
             <div class="modal-footer justify-content-start" style="padding: 0; gap: 1.5rem; color: #4f4f4f; border-color: #10277c; margin-bottom: 0;">
-                <span><i class="far fa-clock"></i> Das 10h às 11h</span>
-                <span><i class="fas fa-map-marker-alt"></i> Localização etc etc etc etc...</span>
+                <span><i class="fas fa-calendar-alt"></i> {{ evento.dataHora }}</span>
+                <span><i class="fas fa-map-marker-alt"></i> {{ evento.localizacao }}</span>
             </div>
         </div>
     </div>
@@ -136,30 +136,54 @@ $hero_background = get_field('bannerBackground');
             </div>
         </div>
         <div class="row" id="programacaoEvento">
-            <div class="col-6">
-                <div class="card" style="padding: 1rem;">
-                    <div class="row" style="gap: 1.25rem;">
-                        <div class="col-1">
-                            <button style="height: 8rem;"><i class="far fa-plus-circle"></i> Saiba Mais</button>
+            <div class="col-6" v-for="(post, index) in posts">
+                <div class="card" style="padding: 1rem; border-radius: 12px;">
+                    <div class="row" style="gap: 1.25rem; min-height: 10rem;">
+                        <div class="col-1" style="padding: 0 .5rem;">
+                            <button style="height: 100%;"><i class="far fa-plus-circle"></i> Saiba Mais</button>
                         </div>
                         <div class="col-10">
-                            <h5>Titulo do Evento Titulo do Evento Titulo do Evento Titulo do Evento Titulo do Evento</h5>
-                            <div class="row" style="font-size: 1.15rem; color: #4f4f4f;">
-                                <div class="col-5">
-                                    <span><i class="far fa-clock"></i> Das 10h às 11h</span>
+                            <a data-bs-toggle="modal" @click="selectedPost(post.id)" :data-bs-target="'#modal2-'+index" style="cursor: pointer;" >{{post.titulo}}</a>
+                            <hr>
+                            <div class="row" style="font-size: .95rem; color: #4f4f4f;">
+                                <div class="col-4">
+                                    <span><i class="far fa-clock"></i> {{post.horario}}</span>
                                 </div>
-                                <div class="col-7">
-                                    <span><i class="fas fa-map-marker-alt"></i> Localização etc etc etc etc...</span>
+                                <div class="col-8">
+                                    <span><i class="fas fa-map-marker-alt"></i> {{post.localizacao}}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- Modal - programacao ao vivo -->
+<div class="modal fade" :id="'modal2-'+index" tabindex="-1" :aria-labelledby="'modal2-'+index"
+        aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content eventoModal" style="padding: 1.75rem;">
+            <div class="modal-header" style="padding: 0; border-bottom: 0;">
+                <h5 class="modal-title" id="exampleModalLabel">{{ evento.titulo }}</h5>
+                <i data-bs-dismiss="modal" aria-label="Close" class="fas fa-times close"></i>
+            </div>
+            <div class="modal-body" style="padding: 0;">
+                <div class="ratio ratio-16x9">
+                    <iframe :src="evento.embed" title="Veja o vídeo do evento" allowscriptaccess="always" allow="autoplay" allowfullscreen></iframe>
+                </div>
+                <p style="color: #555; margin-bottom: 2rem;">{{ evento.descricao }}</p>
+                <strong style="font-family: 'Squada one';">Youtube e Canal de TV Canal Saúde</strong>
+            </div>
+            <div class="modal-footer justify-content-start" style="padding: 0; gap: 1.5rem; color: #4f4f4f; border-color: #10277c; margin-bottom: 0;">
+                <span><i class="fas fa-calendar-alt"></i> {{ evento.dataHora }}</span>
+                <span><i class="fas fa-map-marker-alt"></i> {{ evento.localizacao }}</span>
             </div>
         </div>
+    </div>
+</div>
+            </div>
+        </div>    
         
-        <!-- LOOP DE POST DOS PROGRAMAS COM PAGINACAO E BUSCA EM AJAX -->
     </section>
+
     <section id="programacaoGravada">
         <h1 style="text-align: center;">PROGRAMAÇÃO GRAVADA</h1>
         <section class="justify-content-center">

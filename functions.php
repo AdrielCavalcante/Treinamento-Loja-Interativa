@@ -157,10 +157,14 @@ function convidados_posts($request)
  */
 function eventos_posts($request)
 {
+
     $params = $request->get_params();
 
+    $paged = !empty($params['paged']) ? $params['paged'] : 1;
+
     $args = [
-        'post_type' => 'eventos'
+        'paged' => $paged,
+        'post_type' => 'eventos', 'posts_per_page' => 8
     ];
 
     $query = new WP_Query($args);
@@ -178,6 +182,7 @@ function eventos_posts($request)
             $post[$count]['descricao'] = get_field('descricao');
             $post[$count]['embed'] = get_field('embed');
             $post[$count]['dataHora'] = get_field('dataHora');
+            $post[$count]['horario'] = get_field('horario');
             $post[$count]['localizacao'] = get_field('localizacao');
             $count++;
         }

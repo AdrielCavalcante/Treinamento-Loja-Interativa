@@ -104,83 +104,201 @@ $hero_background = get_field('bannerBackground');
         <h1>PROGRAMAÇÃO AO VIVO</h1>
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">SEGUNDA, 17</a>
+                <a class="nav-link" :class="active == 17 ? 'active' : ''" aria-current="page" style="cursor: pointer;" @click="getDayProgramacao(17)">SEGUNDA, 17</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " aria-current="page" href="#">TERÇA, 18</a>
+                <a class="nav-link" :class="active == 18 ? 'active' : '' " aria-current="page" style="cursor: pointer;" @click="getDayProgramacao(18)">TERÇA, 18</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " aria-current="page" href="#">QUARTA, 19</a>
+                <a class="nav-link" :class="active == 19 ? 'active' : '' " aria-current="page" style="cursor: pointer;" @click="getDayProgramacao(19)">QUARTA, 19</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " aria-current="page" href="#">QUINTA, 20</a>
+                <a class="nav-link" :class="active == 20 ? 'active' : '' " aria-current="page" style="cursor: pointer;" @click="getDayProgramacao(20)">QUINTA, 20</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " aria-current="page" href="#">SEXTA, 21</a>
+                <a class="nav-link" :class="active == 21 ? 'active' : '' " aria-current="page" style="cursor: pointer;" @click="getDayProgramacao(21)">SEXTA, 21</a>
             </li>
         </ul>
         <div class="d-flex" style="margin: 1rem 0; gap: 2rem;">
             <div style="width: 50%;">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar" aria-describedby="button-addon2">
-                    <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
+                    <input type="text" v-model="message" @change="search(message)" class="form-control" placeholder="Buscar" aria-label="Buscar" aria-describedby="button-addon2">
+                    <button class="btn btn-outline-secondary" @click="search(message)" type="button" id="button-addon2"><i class="fas fa-search"></i></button>
                 </div>
             </div>
             <div style="width: 50%;">
-                <select class="form-select" aria-label="As unidades">
-                    <option selected>Todas as unidades</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                <select class="form-select" @change="select(localizacao)" v-model="localizacao" aria-label="As unidades">
+                    <option value="">Todas as unidades</option>
+                    <option value="Instituto de Comunicação e Informação Científica e Tecnológica em Saúde">Instituto de Comunicação e Informação Científica e Tecnológica em Saúde</option>
+                    <option value="Instituto do Teste">Instituto do Teste</option>
                 </select>
             </div>
         </div>
-        <div class="row" id="programacaoEvento">
-            <div class="col-6" v-for="(post, index) in posts">
-                <div class="card" style="padding: 1rem; border-radius: 12px;">
-                    <div class="row" style="gap: 1.25rem; min-height: 10rem;">
-                        <div class="col-1" style="padding: 0 .5rem;">
-                            <button style="height: 100%;"><i class="far fa-plus-circle"></i> Saiba Mais</button>
-                        </div>
-                        <div class="col-10">
-                            <a data-bs-toggle="modal" @click="selectedPost(post.id)" :data-bs-target="'#modal2-'+index" style="cursor: pointer;" >{{post.titulo}}</a>
-                            <hr>
-                            <div class="row" style="font-size: .95rem; color: #4f4f4f;">
-                                <div class="col-4">
-                                    <span><i class="far fa-clock"></i> {{post.horario}}</span>
+        <div v-if="filtered">
+            <div  id="programacaoEvento">
+                <div class="row" v-if="postsFiltrados.length != 0">
+                    <div class="col-6" v-for="(post, index) in postsFiltrados">
+                        <div class="card" style="padding: 1rem; border-radius: 12px;">
+                            <div class="row" style="gap: 1.25rem; min-height: 10rem;">
+                                <div class="col-1" style="padding: 0 .5rem;">
+                                    <button data-bs-toggle="modal" @click="selectedPost(post.id)" :data-bs-target="'#modal2-'+index" style="cursor: pointer; height: 100%;"><i class="far fa-plus-circle"></i> Saiba Mais</button>
                                 </div>
-                                <div class="col-8">
-                                    <span><i class="fas fa-map-marker-alt"></i> {{post.localizacao}}</span>
+                                <div class="col-10">
+                                    <a data-bs-toggle="modal" @click="selectedPost(post.id)" :data-bs-target="'#modal2-'+index" style="cursor: pointer;" >{{post.titulo}}</a>
+                                    <hr>
+                                    <div class="row" style="font-size: .95rem; color: #4f4f4f;">
+                                        <div class="col-4">
+                                            <span><i class="far fa-clock"></i> {{post.horario}}</span>
+                                        </div>
+                                        <div class="col-8">
+                                            <span><i class="fas fa-map-marker-alt"></i> {{post.localizacao}}</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- Modal - programacao ao vivo -->
+        <div class="modal fade" :id="'modal2-'+index" tabindex="-1" :aria-labelledby="'modal2-'+index"
+                aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content eventoModal" style="padding: 1.75rem;">
+                    <div class="modal-header" style="padding: 0; border-bottom: 0;">
+                        <h5 class="modal-title" id="exampleModalLabel">{{ evento.titulo }}</h5>
+                        <i data-bs-dismiss="modal" aria-label="Close" class="fas fa-times close"></i>
+                    </div>
+                    <div class="modal-body" style="padding: 0;">
+                        <div class="ratio ratio-16x9">
+                            <iframe :src="evento.embed" title="Veja o vídeo do evento" allowscriptaccess="always" allow="autoplay" allowfullscreen></iframe>
+                        </div>
+                        <p style="color: #555; margin-bottom: 2rem;">{{ evento.descricao }}</p>
+                        <strong style="font-family: 'Squada one';">Youtube e Canal de TV Canal Saúde</strong>
+                    </div>
+                    <div class="modal-footer justify-content-start" style="padding: 0; gap: 1.5rem; color: #4f4f4f; border-color: #10277c; margin-bottom: 0;">
+                        <span><i class="fas fa-calendar-alt"></i> {{ evento.dataHora }}</span>
+                        <span><i class="fas fa-map-marker-alt"></i> {{ evento.localizacao }}</span>
                     </div>
                 </div>
-                <!-- Modal - programacao ao vivo -->
-<div class="modal fade" :id="'modal2-'+index" tabindex="-1" :aria-labelledby="'modal2-'+index"
-        aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-xl">
-        <div class="modal-content eventoModal" style="padding: 1.75rem;">
-            <div class="modal-header" style="padding: 0; border-bottom: 0;">
-                <h5 class="modal-title" id="exampleModalLabel">{{ evento.titulo }}</h5>
-                <i data-bs-dismiss="modal" aria-label="Close" class="fas fa-times close"></i>
-            </div>
-            <div class="modal-body" style="padding: 0;">
-                <div class="ratio ratio-16x9">
-                    <iframe :src="evento.embed" title="Veja o vídeo do evento" allowscriptaccess="always" allow="autoplay" allowfullscreen></iframe>
-                </div>
-                <p style="color: #555; margin-bottom: 2rem;">{{ evento.descricao }}</p>
-                <strong style="font-family: 'Squada one';">Youtube e Canal de TV Canal Saúde</strong>
-            </div>
-            <div class="modal-footer justify-content-start" style="padding: 0; gap: 1.5rem; color: #4f4f4f; border-color: #10277c; margin-bottom: 0;">
-                <span><i class="fas fa-calendar-alt"></i> {{ evento.dataHora }}</span>
-                <span><i class="fas fa-map-marker-alt"></i> {{ evento.localizacao }}</span>
             </div>
         </div>
     </div>
 </div>
+<div v-else>
+    <div class="col-12">
+        <h5 style="text-align: center;">Não há eventos para esse filtro</h5>
+    </div>
+</div>
+            </div>    
+        </div>
+        <div v-else-if="pressed">
+            <div  id="programacaoEvento">
+                <div class="row" v-if="postsDia.length != 0">
+                    <div class="col-6" v-for="(post, index) in postsDia">
+                        <div class="card" style="padding: 1rem; border-radius: 12px;">
+                            <div class="row" style="gap: 1.25rem; min-height: 10rem;">
+                                <div class="col-1" style="padding: 0 .5rem;">
+                                    <button data-bs-toggle="modal" @click="selectedPost(post.id)" :data-bs-target="'#modal2-'+index" style="cursor: pointer; height: 100%;"><i class="far fa-plus-circle"></i> Saiba Mais</button>
+                                </div>
+                                <div class="col-10">
+                                    <a data-bs-toggle="modal" @click="selectedPost(post.id)" :data-bs-target="'#modal2-'+index" style="cursor: pointer;" >{{post.titulo}}</a>
+                                    <hr>
+                                    <div class="row" style="font-size: .95rem; color: #4f4f4f;">
+                                        <div class="col-4">
+                                            <span><i class="far fa-clock"></i> {{post.horario}}</span>
+                                        </div>
+                                        <div class="col-8">
+                                            <span><i class="fas fa-map-marker-alt"></i> {{post.localizacao}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal - programacao ao vivo -->
+        <div class="modal fade" :id="'modal2-'+index" tabindex="-1" :aria-labelledby="'modal2-'+index"
+                aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content eventoModal" style="padding: 1.75rem;">
+                    <div class="modal-header" style="padding: 0; border-bottom: 0;">
+                        <h5 class="modal-title" id="exampleModalLabel">{{ evento.titulo }}</h5>
+                        <i data-bs-dismiss="modal" aria-label="Close" class="fas fa-times close"></i>
+                    </div>
+                    <div class="modal-body" style="padding: 0;">
+                        <div class="ratio ratio-16x9">
+                            <iframe :src="evento.embed" title="Veja o vídeo do evento" allowscriptaccess="always" allow="autoplay" allowfullscreen></iframe>
+                        </div>
+                        <p style="color: #555; margin-bottom: 2rem;">{{ evento.descricao }}</p>
+                        <strong style="font-family: 'Squada one';">Youtube e Canal de TV Canal Saúde</strong>
+                    </div>
+                    <div class="modal-footer justify-content-start" style="padding: 0; gap: 1.5rem; color: #4f4f4f; border-color: #10277c; margin-bottom: 0;">
+                        <span><i class="fas fa-calendar-alt"></i> {{ evento.dataHora }}</span>
+                        <span><i class="fas fa-map-marker-alt"></i> {{ evento.localizacao }}</span>
+                    </div>
+                </div>
             </div>
-        </div>    
+        </div>
+    </div>
+</div>
+<div v-else>
+    <div class="col-12">
+        <h5 style="text-align: center;">Não há eventos para esse dia</h5>
+    </div>
+</div>
+            </div>    
+        </div>
+        <div v-else>
+        <div  id="programacaoEvento">
+            <div class="row" v-if="posts.length != 0">
+                <div class="col-6" v-for="(post, index) in posts">
+                    <div class="card" style="padding: 1rem; border-radius: 12px;">
+                        <div class="row" style="gap: 1.25rem; min-height: 10rem;">
+                            <div class="col-1" style="padding: 0 .5rem;">
+                                <button data-bs-toggle="modal" @click="selectedPost(post.id)" :data-bs-target="'#modal2-'+index" style="cursor: pointer; height: 100%;"><i class="far fa-plus-circle"></i> Saiba Mais</button>
+                            </div>
+                            <div class="col-10">
+                                <a data-bs-toggle="modal" @click="selectedPost(post.id)" :data-bs-target="'#modal2-'+index" style="cursor: pointer;" >{{post.titulo}}</a>
+                                <hr>
+                                <div class="row" style="font-size: .95rem; color: #4f4f4f;">
+                                    <div class="col-4">
+                                        <span><i class="far fa-clock"></i> {{post.horario}}</span>
+                                    </div>
+                                    <div class="col-8">
+                                        <span><i class="fas fa-map-marker-alt"></i> {{post.localizacao}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal - programacao ao vivo -->
+    <div class="modal fade" :id="'modal2-'+index" tabindex="-1" :aria-labelledby="'modal2-'+index"
+            aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content eventoModal" style="padding: 1.75rem;">
+                <div class="modal-header" style="padding: 0; border-bottom: 0;">
+                    <h5 class="modal-title" id="exampleModalLabel">{{ evento.titulo }}</h5>
+                    <i data-bs-dismiss="modal" aria-label="Close" class="fas fa-times close"></i>
+                </div>
+                <div class="modal-body" style="padding: 0;">
+                    <div class="ratio ratio-16x9">
+                        <iframe :src="evento.embed" title="Veja o vídeo do evento" allowscriptaccess="always" allow="autoplay" allowfullscreen></iframe>
+                    </div>
+                    <p style="color: #555; margin-bottom: 2rem;">{{ evento.descricao }}</p>
+                    <strong style="font-family: 'Squada one';">Youtube e Canal de TV Canal Saúde</strong>
+                </div>
+                <div class="modal-footer justify-content-start" style="padding: 0; gap: 1.5rem; color: #4f4f4f; border-color: #10277c; margin-bottom: 0;">
+                    <span><i class="fas fa-calendar-alt"></i> {{ evento.dataHora }}</span>
+                    <span><i class="fas fa-map-marker-alt"></i> {{ evento.localizacao }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+                </div>
+                </div>
+                <div v-else>
+                    <div class="col-12">
+                        <h5 style="text-align: center;">Não há eventos esta semana</h5>
+                    </div>
+                </div>
+            </div>   
+        </div>
         
     </section>
 

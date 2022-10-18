@@ -160,7 +160,7 @@ function eventos_posts($request)
 
     $params = $request->get_params();
 
-    $paged = !empty($params['paged']) ? $params['paged'] : 1;
+    $paged = !empty($params['paged']) ? $params['paged'] : -1;
 
     $args = [
         'paged' => $paged,

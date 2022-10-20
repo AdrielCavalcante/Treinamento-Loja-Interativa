@@ -303,95 +303,149 @@ $hero_background = get_field('bannerBackground');
     </section>
 
     <section id="programacaoGravada">
-        <h1 style="text-align: center;">PROGRAMAÇÃO GRAVADA</h1>
+        <h1 style="text-align: center; margin-bottom: 2rem;">PROGRAMAÇÃO GRAVADA</h1>
         <section class="justify-content-center">
-            <article class="card col-3">
-                <img src="http://fiocruz.local/wp-content/uploads/2022/09/Grupo-287.png" width="64" alt="">
-                <a class="card-title" data-bs-toggle="modal" data-bs-target="#modalGravado" href="#">Podcasts</a>
-            </article>
-            <article class="card col-3">
-                <img src="http://fiocruz.local/wp-content/uploads/2022/09/Grupo-287.png" width="64" alt="">
-                <a class="card-title" data-bs-toggle="modal" data-bs-target="#modalGravado" href="#">Podcasts</a>
-            </article>
-            <article class="card col-3">
-                <img src="http://fiocruz.local/wp-content/uploads/2022/09/Grupo-287.png" width="64" alt="">
-                <a class="card-title" data-bs-toggle="modal" data-bs-target="#modalGravado" href="#">Podcasts</a>
-            </article>
-            <article class="card col-3">
-                <img src="http://fiocruz.local/wp-content/uploads/2022/09/Grupo-287.png" width="64" alt="">
-                <a class="card-title" data-bs-toggle="modal" data-bs-target="#modalGravado" href="#">Podcasts</a>
-            </article>
-            <article class="card col-3">
-                <img src="http://fiocruz.local/wp-content/uploads/2022/09/Grupo-287.png" width="64" alt="">
-                <a class="card-title" data-bs-toggle="modal" data-bs-target="#modalGravado" href="#">Podcasts</a>
-            </article>
-            <article class="card col-3">
-                <img src="http://fiocruz.local/wp-content/uploads/2022/09/Grupo-287.png" width="64" alt="">
-                <a class="card-title" data-bs-toggle="modal" data-bs-target="#modalGravado" href="#">Podcasts</a>
-            </article>
-        </section>
+        <?php 
+            $args = array(
+                'numberposts'   => -1,
+                'post_type'     => 'temas',
+            );
 
-<!-- Modal -->
-<div class="modal fade" id="modalGravado" tabindex="-1" :aria-labelledby="modalGravado"
+            $query = new WP_Query($args);
+            $i = 0;
+            while($query->have_posts()) : $query->the_post();
+        ?>
+            <article class="card col-3" style="cursor: pointer" @mouseover="getTema('<?php the_title(); ?>')" data-bs-toggle="modal" data-bs-target="#modalGravado<?php the_title(); ?>">
+                <img src="http://fiocruz.local/wp-content/uploads/2022/09/Grupo-287.png" width="95" alt="">
+                <h6 class="card-title"><?php the_title(); ?></h6>
+            </article>
+        <?php 
+            $temas[$i]['titulo'] = get_the_title();
+            $temas[$i]['id'] = get_the_ID();
+            $i++;
+            endwhile;
+            wp_reset_query();
+        ?>
+        </section>
+<?php
+
+foreach($temas as $key => $tema):
+    ?>
+<div v-if="tema == '<?php echo $tema['titulo']; ?>'">
+        <!-- Modal Eventos Gravados -->
+<div class="modal fade" id="modalGravado<?php echo $tema['titulo']; ?>" tabindex="-1" aria-labelledby="modalGravado<?php echo $tema['titulo']; ?>"
         aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
-        <div class="modal-content">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content" style="padding: .5rem;">
             <div class="modal-header" style="border-bottom: 0;">
-                <div>
-                    <h5 class="modal-title" id="exampleModalLabel">Podcasts</h5>
-                    <h6 class="modal-title">Lançamento: 29/09</h6>
-                </div>
+                <h5 class="modal-title" id="exampleModalLabel"><?php echo $tema['titulo']; ?></h5>
                 <i data-bs-dismiss="modal" aria-label="Close" class="fas fa-times close"></i>
             </div>
             <div class="modal-body">
             <div class="accordion" id="accordionExample">
+            <?php 
+                $args = array(
+                    'numberposts'   => -1,
+                    'post_type'     => 'eventosgravados',
+                    'meta_key'      => 'tema',
+                    'meta_value'    => $tema['id']
+                );
+
+                $query = new WP_Query($args);
+
+                while($query->have_posts()) : $query->the_post();
+            ?>
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Accordion Item #1
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php the_ID(); ?>" aria-expanded="true" aria-controls="collapseOne">
+                    <i class="far fa-plus-circle"></i>
+                        <div>
+                            <h6><?php the_field('titulo'); ?></h6>      
+                            <p><?php the_field('descricao'); ?></p>
+                        </div>
                     </button>
                     </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div id="collapse<?php the_ID(); ?>" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                        <div class="ratio ratio-16x9">
+                            <iframe src="<?php the_field('embed'); ?>" title="Veja o vídeo do evento" allowscriptaccess="always" allow="autoplay" allowfullscreen></iframe>
+                        </div>
+                        <span><i class="fas fa-map-marker-alt"></i> <?php the_field('localizacao'); ?></span>
                     </div>
                     </div>
                 </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingTwo">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Accordion Item #2
-                    </button>
-                    </h2>
-                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                    </div>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingThree">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        Accordion Item #3
-                    </button>
-                    </h2>
-                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                    </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <?php
+                endwhile;
+                ?>
             </div>
         </div>
     </div>
 </div>
+</div>
+</div>
+<?php
+    endforeach;
+?>
+
     </section>
-    <section id="novidades">
+    <section id="novidades" style="margin: 2.5rem 0;">
         <h1>NOVIDADES</h1>
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://images.unsplash.com/photo-1666059368813-3b84b929e28d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" class="d-block w-100" height="20" style="opacity: 0;" alt="...">
+      <div class="carousel-caption d-flex container" style="color: black; position: initial; gap: 1.5rem;">
+      <?php 
+                $args = array(  
+                    'post_type' => 'novidades'
+                );
+
+                $query = new WP_Query($args);
+
+                while($query->have_posts()) : $query->the_post();
+                ?>
+                    <a data-bs-toggle="modal" class="col-5" style="text-decoration: none; cursor: pointer;" data-bs-target="#modal<?php echo the_ID();?>">
+                        <div class="card" style="padding: 1rem 1.5rem; text-align: left;">
+                            <?php the_post_thumbnail('full')?>
+                            <div class="conteudo">
+                                <h6 style="margin-top: 1rem;"><?php the_title(); ?></h6>
+                                <p><?php the_field('breveDescricao'); ?></p>
+                            </div>
+                        </div>
+                    </a>
+                        
+
+    <!-- Modal - Novidades -->
+    <div class="modal fade" id="modal<?php echo the_ID();?>" tabindex="-1" aria-labelledby="modal<?php echo the_ID();?>"
+            aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content eventoModal" style="padding: 1.75rem;">
+                <div class="modal-header" style="padding: 0; border-bottom: 0;">
+                    <h5 class="modal-title" id="exampleModalLabel"><?php the_title(); ?></h5>
+                    <i data-bs-dismiss="modal" aria-label="Close" class="fas fa-times close"></i>
+                </div>
+                <div class="modal-body novidades-body" style="padding: 0;">
+                    <?php the_post_thumbnail('full')?>
+                    <p style="color: #555; margin-top: 1rem; margin-bottom: 1rem; text-align: left;"><?php the_field('descricao'); ?></p>
+                </div>
+            </div>
+        </div>
+    </div>
+                        <?php
+                endwhile;
+                ?>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" style="opacity: 1;" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" style="opacity: 1;" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
     </section>
 </main>
 

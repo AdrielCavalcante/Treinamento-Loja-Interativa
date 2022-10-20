@@ -314,12 +314,13 @@ h1 {
 
         .carregar {
             background-color: transparent;
-            border: 1px solid $roxo;
+            border: 2px solid $roxo;
             color: $roxo;
             border-radius: 6px;
             padding: 0.75rem 3rem;
             margin-bottom: 3.5rem;
             font-size: 0.75rem;
+            font-weight: 500;
         }
     }
 
@@ -342,6 +343,10 @@ h1 {
                     border-top-right-radius: 4px;
                     color: $roxo;
                     font-weight: bold;
+
+                    &:hover {
+                        background-color: $ciano;
+                    }
 
                     &:active {
                         background-color: $ciano;
@@ -381,7 +386,6 @@ h1 {
         }
 
         #programacaoEvento {
-
             .col-6 {
                 margin-bottom: 1rem;
             }
@@ -410,26 +414,98 @@ h1 {
 
     #programacaoGravada {
         background-image: url('http://fiocruz.local/wp-content/uploads/2022/09/programacaoGravada.jpeg');
+        background-size: cover;
         display: flex;
         flex-direction: column;
         margin: 2rem 0 0 0;
         width: 100%;
-        padding: 2rem 7.5rem;
+        padding: 2.5rem 0;
 
         section {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             gap: .5rem;
-
+            
             article {
-                padding: .5rem;
+                padding: .75rem 0;
+                gap: .75rem;
                 flex-direction: row;
                 align-items: center;
-                justify-content: space-around;
+                justify-content: space-evenly;
+                
+                h6 {
+                    color: $roxo;
+                    font-size: 1.5rem;
+                    margin: 0;
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+
+    #novidades {
+        .carousel-control-next-icon {
+            padding: 2rem 1.75rem 1.75rem 2rem;
+            background-image: none;
+            background-color: #eee;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &::before {
+                font-family: "Font Awesome 5 Pro";
+                content: "\f054";
+                font-size: 1.5rem;
+                color: $rosa;
+            }
+        }
+        .carousel-control-prev-icon {
+            padding: 2rem 2rem 1.75rem 1.75rem;
+            background-image: none;
+            background-color: #eee;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &::before {
+                font-family: "Font Awesome 5 Pro";
+                content: "\f053";
+                font-size: 1.5rem;
+                color: $rosa;
             }
         }
 
+        .carousel-caption {
+            justify-content: center;
+
+            .card {
+                border-radius: 10px;
+            }
+
+            img {
+                width: 100% !important;
+                border-radius: 8px;
+                height: auto;
+            }
+            
+            .conteudo {
+                margin: 0 1rem;
+
+                h6 {
+                    font-size: 1.2rem;
+                    text-decoration: underline;
+                    color: $roxo;
+                }
+
+                p {
+                    margin-bottom: .5rem;
+                    color: #404040;
+                }
+            }
+        }
     }
 }
 
@@ -444,31 +520,86 @@ h1 {
         }
 
         h5 {
-            font-size: 2rem;
+            font-size: 2.75rem;
             margin-bottom: 15px;
             line-height: 1;
+            color: $roxo;
+            font-family: "Squada One", sans-serif;
+
+        }
+
+        i{ 
+            font-size: 2rem;
+            border: 4px solid gray; 
+            border-radius: 50%; 
+            color: gray; 
+            padding: 0.45rem 0.75rem 0.25rem 0.75rem;
         }
     }
 
     .eventoModal {
-
         div {
             margin-bottom: 1rem;
         }
+    }
 
-        .modal-header {
-            h5 {
-                font-size: 2.75rem;
-                color: $roxo;
-                font-family: "Squada One", sans-serif;
+    .accordion {
+        .accordion-item {
+            border: 1.5px solid black;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+
+            .accordion-button{
+                background-color: transparent;
+
+                i {
+                    color: $roxo;
+                    font-size: 2rem;
+                    margin-right: 1.5rem;
+                }
+
+                &:not(.collapsed){
+                    color: black;
+                    background-color: $amarelo;
+                    box-shadow: inset 0 calc(var(--bs-accordion-border-width)*-1) 0 $amarelo;
+
+                    i {
+                        &::before {
+                            content: none;
+                        }
+
+                        &::after {
+                            content: "\f056";
+                        }
+                    }
+                }
+
+                &::after {
+                   display: none; 
+                }
             }
 
-            i{ 
-                font-size: 2rem;
-                border: 4px solid gray; 
-                border-radius: 50%; 
-                color: gray; 
-                padding: 0.45rem 0.75rem 0.25rem 0.75rem;
+            h6 {
+                color: $roxo;
+                font-size: 1.25rem;
+            }
+        }
+
+        .accordion-body {
+            .ratio {
+                margin-bottom: 1rem;
+            }
+
+            span {
+                font-size: 1.25rem;
+                color: #4f4f4f;
+                display: flex;
+                align-items: center;
+
+                i{
+                    font-size: 2rem;
+                    margin-right: .5rem;
+                }
             }
         }
     }

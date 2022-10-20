@@ -236,6 +236,20 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }).mount('#programacao');
 
+    createApp({
+        data() {
+            return {
+                tema: ""
+            }
+        },
+        methods: {
+            getTema(tema) {
+                this.tema = tema;
+            },
+        },
+    }).mount('#programacaoGravada');
+    
+
 });
 
 

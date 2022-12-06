@@ -17,7 +17,7 @@ function registro_script() {
     wp_register_script('Vue', THEME_URL . "/js/vue.global.js");
     wp_register_script('vue-app', THEME_URL . "/js/app.js", 'Vue');
     wp_register_script('axios', THEME_URL . "/node_modules/axios/dist/axios.min.js", 'Vue');
-    wp_register_script('pai_script', THEME_URL . "/js/index.js", [
+    wp_register_script('pai_script', THEME_URL . "/js/index.js?rand=" . rand(10, 10000), [
         'Vue',
         'vue-app',
         'axios',

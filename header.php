@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html <?php language_attributes(); ?>>
+<html id="pagina" <?php language_attributes(); ?>>
 
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
@@ -8,7 +8,7 @@
     <?php wp_head(); ?>
 </head>
 
-<body <?php body_class(); ?>>
+<body id="body" <?php body_class(); ?>>
     <div id="page" class="site">
         <header>
             <nav class="navbar navbar-expand-lg fixed-top">
@@ -18,7 +18,7 @@
                         the_custom_logo();
                     } else {
                     ?>
-                        <span style="font-family: 'Squada One', saens-serif">18° SEMANA NACIONAL DE CIÊNCIA <br> E TECNOLOGIA FIOCRUZ 2021</span>
+                        <span id="logo" style="font-family: 'Squada One', saens-serif">18° SEMANA NACIONAL DE CIÊNCIA <br> E TECNOLOGIA FIOCRUZ 2021</span>
                     <?php
                     }
                     ?>
@@ -41,12 +41,12 @@
                                 <div class="box-top align-items-baseline">
                                     <strong>TEXTO</strong>
                                     <div>
-                                        <span style="color: #05C6B7; font-size: 0.75rem">A</span>
-                                        <span style="color: #05C6B7; font-size: 1rem">A</span>
-                                        <span style="color: #05C6B7; font-size: 1.25rem">A</span>
+                                        <span id="sub" style="color: #05C6B7; font-size: 0.75rem">A</span>
+                                        <span id="normal" style="color: #05C6B7; font-size: 1rem">A</span>
+                                        <span id="soma" style="color: #05C6B7; font-size: 1.25rem">A</span>
                                     </div>
                                 </div>
-                                <div class="box-top alto-contraste align-items-center">
+                                <div id="contraste" class="box-top alto-contraste align-items-center">
                                     <i class="fas fa-adjust" style="color: #05C6B7"></i>
                                     <strong>ALTO CONTRASTE</strong>
                                 </div>

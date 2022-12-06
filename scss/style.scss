@@ -12,12 +12,86 @@
     box-sizing: border-box;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-size: var(--tamanhoTitulo);   
+}
+
+p {
+    font-size: var(--tamanhoTexto);
+}
+
 h1 {
     @include mixins.tituloMain;
 }
 
+.dark-mode {
+    div, section, article {
+        background-color: var(--fundo);
+    }
+
+    main, section, footer, nav {
+        border: 1px solid #FFF;
+    }
+
+    p {
+        color: var(--texto);
+    }
+
+    .navbar {
+        #logo {
+            color: #FFF;
+        }
+
+        .box-top {
+            a {
+                color: #000 !important;
+            }
+        }
+    }
+
+    .hero {
+        background: none !important;
+        border: 1px solid #FFF;
+    }
+
+    .modal-content {
+        border: 2px solid #FFF;
+
+        * {
+            color: var(--texto);
+        }
+    }
+
+    .card {
+        * {
+            color: var(--texto);
+        }
+
+        button {
+            color: #000 !important;
+
+            i {
+                color: #000 !important;
+            }
+        }
+    }
+
+    .nav-tabs {
+        .nav-item {
+            .active {
+                color: #000 !important;
+            }
+        }
+    }
+
+    #programacaoGravada {
+        background-image: none !important;
+        border: 1px solid #FFF;
+    }
+}
+
 .navbar {
-    background-color: $branco;
+    background-color: var(--fundo);
     --bs-navbar-padding-y: 0;
     -webkit-box-shadow: 0px 4px 4px -2px rgb(0 0 0 / 30%);
     box-shadow: 0px 4px 4px -2px rgb(0 0 0 / 30%);
@@ -37,6 +111,7 @@ h1 {
     #top-menu {
         margin-bottom: .75rem;
         margin-right: .75rem;
+        gap: 1rem;
 
         @include mixins.tablet {
             width: 100%;
@@ -51,6 +126,10 @@ h1 {
             @include mixins.mobile {
                 flex-direction: column;
                 gap: 1rem;
+            }
+
+            #contraste, #sub, #normal, #soma {
+                cursor: pointer;
             }
 
             .box-top {
@@ -73,12 +152,12 @@ h1 {
     
                 strong {
                     font-size: .75rem;
-                    color: #404040;
+                    color: var(--strong);
                 }
     
                 a {
                     color: #FFF;
-                    background-color: $ciano;
+                    background-color: var(--ciano);
                     border-radius: 50%;
                     width: 30px;
                     height: 30px;
@@ -95,7 +174,7 @@ h1 {
     .nav-link {
         font-weight: 600;
         font-size: 1rem;
-        color: black;
+        color: var(--texto);
         text-decoration: none;
 
         @include mixins.tablet {
@@ -140,8 +219,8 @@ h1 {
 
         button {
             font-family: 'Squada One', sans-serif;
-            background-color: $ciano;
-            border-color: $ciano;
+            background-color: var(--ciano);
+            border-color: var(--ciano);
             font-weight: bold;
             margin-top: .5rem;
             padding: 0.5rem 1rem;
@@ -150,9 +229,9 @@ h1 {
             transition: .5s;
 
             &:hover {
-                background-color: $rosa;
-                border-color: $rosa;
-                color: $branco;
+                background-color: var(--rosa);
+                border-color: var(--rosa);
+                color: var(--fundo);
             }
         }
     }
@@ -165,7 +244,7 @@ h1 {
         box-shadow: 0px 4px 4px -2px rgb(0 0 0 / 30%);
 
         div {
-            border-right: 1px solid grey;
+            border-right: 1px solid var(--cinza);
             padding: 1rem 2rem;
             margin: 1rem 0;
 
@@ -175,13 +254,13 @@ h1 {
 
             strong {
                 font-size: 3rem;
-                color: $laranja;
+                color: var(--laranja);
                 font-family: "Squada One", sans-serif;
                 letter-spacing: 2px;
             }
 
             span {
-                color: gray;
+                color: var(--strong);
             }
         }
     }
@@ -203,7 +282,7 @@ h1 {
             }
 
             h2 {
-                color: $roxo;
+                color: var(--roxo);
                 font-family: "Squada One", sans-serif;
             }
 
@@ -212,8 +291,8 @@ h1 {
             }
 
             button {
-                background-color: $ciano;
-                border-color: $ciano;
+                background-color: var(--ciano);
+                border-color: var(--ciano);
                 font-weight: bold;
                 margin-top: .5rem;
                 padding: 0.5rem 1rem;
@@ -222,9 +301,9 @@ h1 {
                 transition: .5s;
     
                 &:hover {
-                    background-color: $rosa;
-                    border-color: $rosa;
-                    color: $branco;
+                    background-color: var(--rosa);
+                    border-color: var(--rosa);
+                    color: var(--fundo);
                 }
             }
         }
@@ -238,18 +317,18 @@ h1 {
         margin: 2rem 0 0 0;
         width: 100%;
         padding: 2rem 7.5rem;
-        background-color: $amarelo;
+        background-color: var(--amareloFundo);
 
         p{
             text-align: center;
             margin-top: 0;
             margin-bottom: 1rem;
-            color: $roxo;
+            color: var(--roxo);
         }
 
         button {
-            background-color: $ciano;
-            border-color: $ciano;
+            background-color: var(--ciano);
+            border-color: var(--ciano);
             font-weight: bold;
             margin-top: .5rem;
             padding: 0.5rem 2.5rem;
@@ -258,9 +337,9 @@ h1 {
             transition: .5s;
 
             &:hover {
-                background-color: $rosa;
-                border-color: $rosa;
-                color: $branco;
+                background-color: var(--rosa);
+                border-color: var(--rosa);
+                color: var(--fundo);
             }
         }
 
@@ -271,12 +350,12 @@ h1 {
             margin-top: 2rem;
 
             a {
-                color: $roxo;
+                color: var(--roxo);
                 font-weight: 600;
                 margin-right: 2rem;
 
                 &:hover {
-                    color: $azul;
+                    color: var(--azul);
                 }
 
                 &:last-child {
@@ -298,14 +377,14 @@ h1 {
     
                     h5 {
                         font-size: 1rem;
-                        color: $roxo;
+                        color: var(--roxo);
                         text-decoration: underline;
                     }
         
                     small {
                         font-size: .75rem;
                         text-decoration: underline;
-                        color: black;
+                        color: var(--texto);
                         font-family: 'Titillium Web', sans-serif;
                     }
                 }
@@ -314,8 +393,8 @@ h1 {
 
         .carregar {
             background-color: transparent;
-            border: 2px solid $roxo;
-            color: $roxo;
+            border: 2px solid var(--roxo);
+            color: var(--roxo);
             border-radius: 6px;
             padding: 0.75rem 3rem;
             margin-bottom: 3.5rem;
@@ -341,15 +420,15 @@ h1 {
                     border: 1px solid #ccc;
                     border-top-left-radius: 4px;
                     border-top-right-radius: 4px;
-                    color: $roxo;
+                    color: var(--roxo);
                     font-weight: bold;
 
                     &:hover {
-                        background-color: $ciano;
+                        background-color: var(--ciano);
                     }
 
                     &:active {
-                        background-color: $ciano;
+                        background-color: var(--ciano);
                     }
 
                     @include mixins.mobile {
@@ -358,7 +437,7 @@ h1 {
                 }
             }
             .active {
-                background-color: $ciano;
+                background-color: var(--ciano);
             }
         }
 
@@ -392,7 +471,7 @@ h1 {
 
             button {
                 border: none;
-                background-color: $amarelo;
+                background-color: var(--amarelo);
                 border-radius: 8px;
                 font-size: .85rem;
                 padding: 0.75rem;
@@ -404,7 +483,7 @@ h1 {
             }
 
             a {
-                color: $roxo;
+                color: var(--roxo);
                 font-size: 1.25rem;
                 min-height: 4rem;
                 text-decoration: none;
@@ -435,7 +514,7 @@ h1 {
                 justify-content: space-evenly;
                 
                 h6 {
-                    color: $roxo;
+                    color: var(--roxo);
                     font-size: 1.5rem;
                     margin: 0;
                     font-weight: 500;
@@ -458,7 +537,7 @@ h1 {
                 font-family: "Font Awesome 5 Pro";
                 content: "\f054";
                 font-size: 1.5rem;
-                color: $rosa;
+                color: var(--rosa);
             }
         }
         .carousel-control-prev-icon {
@@ -474,7 +553,7 @@ h1 {
                 font-family: "Font Awesome 5 Pro";
                 content: "\f053";
                 font-size: 1.5rem;
-                color: $rosa;
+                color: var(--rosa);
             }
         }
 
@@ -497,12 +576,12 @@ h1 {
                 h6 {
                     font-size: 1.2rem;
                     text-decoration: underline;
-                    color: $roxo;
+                    color: var(--roxo);
                 }
 
                 p {
                     margin-bottom: .5rem;
-                    color: #404040;
+                    color: var(--strong);
                 }
             }
         }
@@ -523,16 +602,16 @@ h1 {
             font-size: 2.75rem;
             margin-bottom: 15px;
             line-height: 1;
-            color: $roxo;
+            color: var(--roxo);
             font-family: "Squada One", sans-serif;
 
         }
 
         i{ 
             font-size: 2rem;
-            border: 4px solid gray; 
+            border: 4px solid var(--cinza); 
             border-radius: 50%; 
-            color: gray; 
+            color: var(--cinza); 
             padding: 0.45rem 0.75rem 0.25rem 0.75rem;
         }
     }
@@ -545,7 +624,7 @@ h1 {
 
     .accordion {
         .accordion-item {
-            border: 1.5px solid black;
+            border: 1.5px solid var(--fundo);
             border-radius: 8px;
             margin-bottom: 1rem;
 
@@ -553,15 +632,15 @@ h1 {
                 background-color: transparent;
 
                 i {
-                    color: $roxo;
+                    color: var(--roxo);
                     font-size: 2rem;
                     margin-right: 1.5rem;
                 }
 
                 &:not(.collapsed){
                     color: black;
-                    background-color: $amarelo;
-                    box-shadow: inset 0 calc(var(--bs-accordion-border-width)*-1) 0 $amarelo;
+                    background-color: var(--amareloFundo);
+                    box-shadow: inset 0 calc(var(--bs-accordion-border-width)*-1) 0 var(--amareloFundo);
 
                     i {
                         &::before {
@@ -580,7 +659,7 @@ h1 {
             }
 
             h6 {
-                color: $roxo;
+                color: var(--roxo);
                 font-size: 1.25rem;
             }
         }
@@ -592,7 +671,7 @@ h1 {
 
             span {
                 font-size: 1.25rem;
-                color: #4f4f4f;
+                color: var(--cinza);
                 display: flex;
                 align-items: center;
 

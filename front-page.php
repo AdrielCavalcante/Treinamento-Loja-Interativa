@@ -170,10 +170,10 @@ $hero_background = get_field('bannerBackground');
                         <div class="ratio ratio-16x9">
                             <iframe :src="evento.embed" title="Veja o vídeo do evento" allowscriptaccess="always" allow="autoplay" allowfullscreen></iframe>
                         </div>
-                        <p style="color: #555; margin-bottom: 2rem;">{{ evento.descricao }}</p>
+                        <p style="margin-bottom: 2rem;">{{ evento.descricao }}</p>
                         <strong style="font-family: 'Squada one';">Youtube e Canal de TV Canal Saúde</strong>
                     </div>
-                    <div class="modal-footer justify-content-start" style="padding: 0; gap: 1.5rem; color: #4f4f4f; border-color: #10277c; margin-bottom: 0;">
+                    <div class="modal-footer justify-content-start" style="padding: 0; gap: 1.5rem; border-color: #10277c; margin-bottom: 0;">
                         <span><i class="fas fa-calendar-alt"></i> {{ evento.dataHora }}</span>
                         <span><i class="fas fa-map-marker-alt"></i> {{ evento.localizacao }}</span>
                     </div>
@@ -201,7 +201,7 @@ $hero_background = get_field('bannerBackground');
                                 <div class="col-10">
                                     <a data-bs-toggle="modal" @click="selectedPost(post.id)" :data-bs-target="'#modal2-'+index" style="cursor: pointer;" >{{post.titulo}}</a>
                                     <hr>
-                                    <div class="row" style="font-size: .95rem; color: #4f4f4f;">
+                                    <div class="row" style="font-size: .95rem;">
                                         <div class="col-4">
                                             <span><i class="far fa-clock"></i> {{post.horario}}</span>
                                         </div>
@@ -225,10 +225,10 @@ $hero_background = get_field('bannerBackground');
                         <div class="ratio ratio-16x9">
                             <iframe :src="evento.embed" title="Veja o vídeo do evento" allowscriptaccess="always" allow="autoplay" allowfullscreen></iframe>
                         </div>
-                        <p style="color: #555; margin-bottom: 2rem;">{{ evento.descricao }}</p>
+                        <p style="margin-bottom: 2rem;">{{ evento.descricao }}</p>
                         <strong style="font-family: 'Squada one';">Youtube e Canal de TV Canal Saúde</strong>
                     </div>
-                    <div class="modal-footer justify-content-start" style="padding: 0; gap: 1.5rem; color: #4f4f4f; border-color: #10277c; margin-bottom: 0;">
+                    <div class="modal-footer justify-content-start" style="padding: 0; gap: 1.5rem; border-color: #10277c; margin-bottom: 0;">
                         <span><i class="fas fa-calendar-alt"></i> {{ evento.dataHora }}</span>
                         <span><i class="fas fa-map-marker-alt"></i> {{ evento.localizacao }}</span>
                     </div>
@@ -256,7 +256,7 @@ $hero_background = get_field('bannerBackground');
                             <div class="col-10">
                                 <a data-bs-toggle="modal" @click="selectedPost(post.id)" :data-bs-target="'#modal2-'+index" style="cursor: pointer;" >{{post.titulo}}</a>
                                 <hr>
-                                <div class="row" style="font-size: .95rem; color: #4f4f4f;">
+                                <div class="row" style="font-size: .95rem;">
                                     <div class="col-4">
                                         <span><i class="far fa-clock"></i> {{post.horario}}</span>
                                     </div>
@@ -280,10 +280,10 @@ $hero_background = get_field('bannerBackground');
                     <div class="ratio ratio-16x9">
                         <iframe :src="evento.embed" title="Veja o vídeo do evento" allowscriptaccess="always" allow="autoplay" allowfullscreen></iframe>
                     </div>
-                    <p style="color: #555; margin-bottom: 2rem;">{{ evento.descricao }}</p>
+                    <p style="margin-bottom: 2rem;">{{ evento.descricao }}</p>
                     <strong style="font-family: 'Squada one';">Youtube e Canal de TV Canal Saúde</strong>
                 </div>
-                <div class="modal-footer justify-content-start" style="padding: 0; gap: 1.5rem; color: #4f4f4f; border-color: #10277c; margin-bottom: 0;">
+                <div class="modal-footer justify-content-start" style="padding: 0; gap: 1.5rem; border-color: #10277c; margin-bottom: 0;">
                     <span><i class="fas fa-calendar-alt"></i> {{ evento.dataHora }}</span>
                     <span><i class="fas fa-map-marker-alt"></i> {{ evento.localizacao }}</span>
                 </div>
@@ -426,7 +426,7 @@ foreach($temas as $key => $tema):
                 </div>
                 <div class="modal-body novidades-body" style="padding: 0;">
                     <?php the_post_thumbnail('full')?>
-                    <p style="color: #555; margin-top: 1rem; margin-bottom: 1rem; text-align: left;"><?php the_field('descricao'); ?></p>
+                    <p style="margin-top: 1rem; margin-bottom: 1rem; text-align: left;"><?php the_field('descricao'); ?></p>
                 </div>
             </div>
         </div>

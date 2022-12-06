@@ -1,7 +1,7 @@
 @use 'variables';
 
 @mixin tituloMain {
-    color: variables.$roxo;
+    color: var(--roxo);
     font-size: 60px;
     font-family: "Squada One", sans-serif;
     text-align: center;

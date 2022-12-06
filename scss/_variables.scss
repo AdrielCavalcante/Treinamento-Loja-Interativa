@@ -1,7 +1,42 @@
-$ciano: #05C6B7;
-$branco: #FFF;
-$rosa: #FF4471;
-$laranja: #fd7e14;
-$roxo: #291C5D;
-$amarelo: #FFC427;
-$azul: #10277c;
+:root {
+    --ciano: #05C6B7;
+    --branco: #FFF;
+    --rosa: #FF4471;
+    --laranja: #fd7e14;
+    --roxo: #291C5D;
+    --amarelo: #FFC427;
+    --amareloFundo: #FFC427;
+    --azul: #10277c;
+    --strong: #404040;
+    --cinza: #808080;
+    --texto: #000;
+    --fundo: #FFF;
+
+    --tamanhoTexto: 1rem;
+    --tamanhoTitulo: 2rem;
+}
+
+.dark-mode:root {
+    --ciano: #FFF;
+    --branco: #FFF;
+    --rosa: #FFF;
+    --laranja: #FFF;
+    --roxo: #FFF;
+    --amarelo: #FFF;
+    --amareloFundo: #000;
+    --azul: #FFF;
+    --strong: #FFF;
+    --cinza: #FFF;
+    --texto: #FFF;
+    --fundo: #000;
+}
+
+.diminuiu:root {
+    --tamanhoTexto: .75rem;
+    --tamanhoTitulo: 1.75rem;
+}
+
+.aumentou:root {
+    --tamanhoTexto: 1.25rem;
+    --tamanhoTitulo: 2.25rem;
+}
